@@ -157,3 +157,8 @@ void turn(int deg, float ang_accel, float max_ang_velocity, short dir){
 	len_mouse = 0;
 	wait_ms(WAIT_TIME);
 }
+
+void learge_turn()
+{
+	
+}

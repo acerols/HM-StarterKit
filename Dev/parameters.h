@@ -46,8 +46,8 @@
 //走行パラメータ
 #define SEARCH_SPEED	(0.3)				//探索走行の速度	[m/s]
 #define SEARCH_ACCEL	(1.0)				//探索走行の加速度	[m/s^2]
-#define FAST_SPEED	(1.0)				//最短走行の速度	[m/s]
-#define FAST_ACCEL	(2.0)				//最短走行の加速度	[m/s^2]
+#define FAST_SPEED	(2.0)				//最短走行の速度	[m/s]
+#define FAST_ACCEL	(4.0)				//最短走行の加速度	[m/s^2]
 #define MIN_SPEED	(0.1)				//最低速度	[m/s]
 
 #define TURN_ACCEL	(PI*2)				//超信地旋回の加速度	[rad/s^2]

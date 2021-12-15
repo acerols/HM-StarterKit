@@ -16,19 +16,19 @@
 #define LOG_CNT		1000				//ログをとる個数。 1mmsで取得しているので、取得時間[s]はこの数の1000分の1
 
 //センサ関連パラメータ
-#define WAITLOOP_SLED	180				//LEDを光らせてからAD変換を開始するまでの時間稼ぎ用定数
+#define WAITLOOP_SLED	140				//LEDを光らせてからAD変換を開始するまでの時間稼ぎ用定数
 
 #define REF_SEN_R	1200				//マウスを迷路中央に置いた時のセンサの値
 #define REF_SEN_L	1200				//マウスを迷路中央に置いた時のセンサの値
 
 #define TH_SEN_R	50				//壁があるか否かの閾値	車体を区画の左へ寄せた時のセンサ値(壁あり)
 #define TH_SEN_L	50				//壁があるか否かの閾値	車体を区画の右へ寄せた時のセンサ値(壁あり)
-#define TH_SEN_FR	50				//壁があるか否かの閾値	
+#define TH_SEN_FR	75				//壁があるか否かの閾値	
 #define TH_SEN_FL	50				//壁があるか否かの閾値
 
 #define CONTH_SEN_R	TH_SEN_R			//制御をかけるか否かの閾値
 #define CONTH_SEN_L	TH_SEN_L			//制御をかけるか否かの閾値
-#define CON_WALL_KP	(10.0)				//壁センサによる姿勢制御の比例制御の比例定数
+#define CON_WALL_KP	(5.0)				//壁センサによる姿勢制御の比例制御の比例定数
 
 //フィードバックゲインパラメータ
 //Pゲイン　最初に調整する	実速度が目標速度を中心として軽く振動する程度に調整
@@ -45,19 +45,19 @@
 
 //走行パラメータ
 #define SEARCH_SPEED	(0.3)				//探索走行の速度	[m/s]
-#define SEARCH_ACCEL	(1.0)				//探索走行の加速度	[m/s^2]
-#define FAST_SPEED	(2.0)				//最短走行の速度	[m/s]
-#define FAST_ACCEL	(4.0)				//最短走行の加速度	[m/s^2]
+#define SEARCH_ACCEL	(1.4)				//探索走行の加速度	[m/s^2]
+#define FAST_SPEED	(3.0)				//最短走行の速度	[m/s]
+#define FAST_ACCEL	(8.0)				//最短走行の加速度	[m/s^2]
 #define MIN_SPEED	(0.1)				//最低速度	[m/s]
 
 #define TURN_ACCEL	(PI*2)				//超信地旋回の加速度	[rad/s^2]
 #define	TURN_SPEED	(PI)				//超信地旋回の最高速度	[rad/s]
 #define TURN_MIN_SPEED	(PI/10.0)			//超信地旋回の最低速度	[rad/s]
 
-#define WAIT_TIME	500				//各動作後の待機時間	[ms]
+#define WAIT_TIME	5				//各動作後の待機時間	[ms]
 
 //迷路関連パラメータ
-#define GOAL_X	3		//ゴール座標(x)
+#define GOAL_X	2		//ゴール座標(x)
 #define GOAL_Y	3		//ゴール座標(y)
 
 //決定用センサパラメータ

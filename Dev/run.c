@@ -43,6 +43,7 @@ void straight(float len, float acc, float max_sp, float end_sp){
 	MOT_POWER_ON;	
 	
 	if(end_speed == 0){	//最終的に停止する場合
+		if(len_target > 0.0){
 		//減速処理を始めるべき位置まで加速、定速区間を続行
 		while( ((len_target -10) - len_mouse) >  1000.0*((float)(tar_speed * tar_speed) - (float)(end_speed * end_speed))/(float)(2.0*accel));
 		//減速処理開始
@@ -58,6 +59,22 @@ void straight(float len, float acc, float max_sp, float end_sp){
 		tar_speed = 0;
 		//速度が0以下になるまで逆転する
 		while(speed >= 0.0);
+		}
+		else{
+			while( ((len_target+10) + len_mouse) < 1000.0*((float)(tar_speed*tar_speed) - (float)(end_speed*end_speed)) /(float)(2.0*accel));
+
+			accel = -acc;
+			while(len_mouse < -(len_target-1)){
+				if(tar_speed <= -MIN_SPEED){
+					accel = 0;
+					tar_speed = -MIN_SPEED;
+				}
+			}
+			accel = 0;
+			tar_speed = 0;
+			//速度が0以下になるまで逆転する
+			while(speed >= 0.0);
+		}
 			
 	}else{
 		//減速処理を始めるべき位置まで加速、定速区間を続行

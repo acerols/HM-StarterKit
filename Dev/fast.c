@@ -9,7 +9,7 @@
 #include "sci.h"
 
 extern int get_nextdir(int x, int y, int mask, t_direction *dir);
-
+void straight_with_var_acc(int count);
 void fast_run(int x, int y)
 {
 //引数の座標x,yに向かって最短走行する
@@ -68,7 +68,7 @@ void fast_run(int x, int y)
 	
 	while((mypos.x != x) || (mypos.y != y)){			//ゴールするまで繰り返す
 
-
+		float straight_acc_arg, straight_spd_arg;
 		switch(get_nextdir(x,y,MASK_SECOND,&glob_nextdir))	//次に行く方向を戻り値とする関数を呼ぶ
 		{
 			case front:					//直線をまとめて走るようにする
@@ -76,19 +76,19 @@ void fast_run(int x, int y)
 				break;
 			
 			case right:
-				straight(SECTION*straight_count,FAST_ACCEL,FAST_SPEED,0.0);
+				straight_with_var_acc(straight_count);
 				turn(90,TURN_ACCEL,TURN_SPEED,RIGHT);				//右に曲がって
 				straight_count = 1;			//走る直線の距離をリセット
 				break;
 			
 			case left:
-				straight(SECTION*straight_count,FAST_ACCEL,FAST_SPEED,0.0);
+				straight_with_var_acc(straight_count);
 				turn(90,TURN_ACCEL,TURN_SPEED,LEFT);				//左に曲がって
 				straight_count = 1;			//走る直線の距離をリセット
 				break;
 			
 			case rear:
-				straight(SECTION*straight_count,FAST_ACCEL,FAST_SPEED,0.0);
+				straight_with_var_acc(straight_count);
 				turn(180,TURN_ACCEL,TURN_SPEED,LEFT);				//左に曲がって
 				straight_count = 1;			//走る直線の距離をリセット
 				break;
@@ -118,4 +118,16 @@ void fast_run(int x, int y)
 		}
 	}
 	straight(SECTION*straight_count,FAST_ACCEL,FAST_SPEED,0.0);
+}
+
+void straight_with_var_acc(int count)
+{
+	float straight_acc_arg = FAST_ACCEL, straight_spd_arg = FAST_SPEED;
+	if (count < 2){
+		straight_acc_arg = FAST_ACCEL - 1.5;
+	}
+	else if(count < 4){
+		straight_acc_arg = FAST_ACCEL - 1.0;
+	}
+	straight(SECTION*count, straight_acc_arg, straight_spd_arg, 0.0);
 }

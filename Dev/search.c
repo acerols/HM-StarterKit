@@ -460,7 +460,9 @@ void search_adachi(int gx, int gy)
 			case left:
 				straight(HALF_SECTION,SEARCH_ACCEL,SEARCH_SPEED,0);		//îºãÊâÊêiÇﬁ
 				turn(90,TURN_ACCEL,TURN_SPEED,LEFT);				//ç∂Ç…ã»Ç™Ç¡Çƒ
-				straight(HALF_SECTION,SEARCH_ACCEL,SEARCH_SPEED,SEARCH_SPEED);
+				straight(-HALF_SECTION, SEARCH_ACCEL, SEARCH_SPEED, SEARCH_SPEED);
+				straight(SECTION, SEARCH_ACCEL, SEARCH_SPEED, SEARCH_SPEED);
+				//straight(HALF_SECTION,SEARCH_ACCEL,SEARCH_SPEED,SEARCH_SPEED);
 				break;
 			
 			case rear:

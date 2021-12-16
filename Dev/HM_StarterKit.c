@@ -159,28 +159,7 @@ void main(void)
 					BEEP();
 
 					wait_ms(500);
-					//straight(-SECTION, -SEARCH_ACCEL,-SEARCH_SPEED,0);
-	I_tar_ang_vel = 0;
-	I_ang_vel = 0;
-	I_tar_speed = 0;
-	I_speed = 0;
-	//走行モードを直線にする
-	run_mode = STRAIGHT_MODE;
-	//壁制御を有効にする
-	con_wall.enable = true;
-	//目標距離をグローバル変数に代入する
-	len_target = -SECTION;
-	//目標速度を設定
-	end_speed = 0.0;
-	//加速度を設定
-	accel = -SEARCH_ACCEL;
-	//最高速度を設定
-	max_speed = -SEARCH_SPEED;
-	
-	//モータ出力をON
-	MOT_POWER_ON;	
-					
-					
+					straight(-SECTION, -SEARCH_ACCEL,-SEARCH_SPEED,0);
 					wait_ms(500);
 				}
 				
@@ -188,7 +167,7 @@ void main(void)
 				
 			case 4:
 				/****************************************
-				*MODE LED STATE				*
+				*MODE LED STATE		*
 				*					*
 				*	D3	D4	D5	D6	*
 				*	X	X	O	X	*

@@ -1,4 +1,4 @@
-;RX Family C/C++ Compiler (V3.03.00 [20 Nov 2020])  15-Dec-2021 18:23:50
+;RX Family C/C++ Compiler (V3.03.00 [20 Nov 2020])  16-Dec-2021 15:18:03
 
 ;*** CPU TYPE ***
 
@@ -23,18 +23,12 @@
 		.glb	_sen_l
 		.glb	_sen_fr
 		.glb	_sen_fl
-		.glb	_con_wall
 		.glb	_mypos
-		.glb	_run_mode
-		.glb	_accel
-		.glb	_max_speed
 		.glb	_speed_r
 		.glb	_speed_l
 		.glb	_speed
-		.glb	_end_speed
 		.glb	_timer
 		.glb	_degree
-		.glb	_len_target
 		.glb	_log_timer
 		.glb	_log_flag
 		.glb	_I_tar_speed
@@ -52,6 +46,7 @@
 		.glb	_wait_ms
 		.glb	_map_copy
 		.glb	_fast_run
+		.glb	_straight
 		.glb	_adjust
 		.glb	_LED
 		.glb	_IOex_SWITCH
@@ -83,7 +78,7 @@ L15:	; entry.split4
 L16:	; entry.split5
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",59
 		MOV.W #0001H, 02H[R0]
-		BRA L142
+		BRA L132
 L17:	; switch_clause_bb
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",78
 		MOV.L #_sen_fr, R14
@@ -95,7 +90,7 @@ L17:	; switch_clause_bb
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
+		BLT L113
 L18:	; if_then_bb
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",79
 		BSR _BEEP
@@ -209,7 +204,7 @@ L41:	; if_then_bb.split27
 L42:	; if_then_bb.split28
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",103
 		BSR _BEEP
-		BRA L123
+		BRA L113
 L43:	; switch_clause_bb21
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",118
 		MOV.L #_sen_fr, R14
@@ -221,7 +216,7 @@ L43:	; switch_clause_bb21
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
+		BLT L113
 L44:	; if_then_bb36
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",119
 		BSR _BEEP
@@ -334,7 +329,7 @@ L67:	; if_then_bb36.split50
 L68:	; if_then_bb36.split51
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",143
 		BSR _BEEP
-		BRA L123
+		BRA L113
 L69:	; switch_clause_bb42
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",158
 		MOV.L #_sen_fr, R14
@@ -346,7 +341,7 @@ L69:	; switch_clause_bb42
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
+		BLT L113
 L70:	; if_then_bb58
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",159
 		BSR _BEEP
@@ -356,58 +351,63 @@ L71:	; if_then_bb58.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",161
 		BSR _wait_ms
 L72:	; if_then_bb58.split52
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",163
-		MOV.L #_I_tar_ang_vel, R14
-		MOV.L #00000000H, [R14]
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
+		MOV.L #00000000H, R4
+		MOV.L #0BE99999AH, R3
+		MOV.L #0BFB33333H, R2
+		MOV.L #0C2B40000H, R1
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",162
+		BSR _straight
 L73:	; if_then_bb58.split53
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",164
-		MOV.L #_I_ang_vel, R14
-		MOV.L #00000000H, [R14]
-L74:	; if_then_bb58.split54
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",165
-		MOV.L #_I_tar_speed, R14
-		MOV.L #00000000H, [R14]
-L75:	; if_then_bb58.split55
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",166
-		MOV.L #_I_speed, R14
-		MOV.L #00000000H, [R14]
-L76:	; if_then_bb58.split56
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",168
-		MOV.L #_run_mode, R14
-		MOV.L #00000000H, [R14]
-L77:	; if_then_bb58.split57
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",170
-		MOV.L #_con_wall, R1
-		MOV.L #00000001H, 34H[R1]
-L78:	; if_then_bb58.split58
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",172
-		MOV.L #_len_target, R14
-		MOV.L #0C2B40000H, [R14]
-L79:	; if_then_bb58.split59
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",174
-		MOV.L #_end_speed, R14
-		MOV.L #00000000H, [R14]
-L80:	; if_then_bb58.split60
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",176
-		MOV.L #_accel, R14
-		MOV.L #0BFB33333H, [R14]
-L81:	; if_then_bb58.split61
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
+		MOV.L #000001F4H, R1
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",163
+		BSR _wait_ms
+		BRA L113
+L74:	; switch_clause_bb60
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",178
-		MOV.L #_max_speed, R14
-		MOV.L #0BE99999AH, [R14]
-L82:	; if_then_bb58.split62
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L113
+L75:	; if_then_bb75
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",179
+		BSR _BEEP
+L76:	; if_then_bb75.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
-		MOV.L #0008C02CH, R14
+		MOV.L #000001F4H, R1
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",181
-		BSET #06H, [R14].B
-L83:	; if_then_bb58.split63
+		BSR _wait_ms
+		BRA L113
+L77:	; switch_clause_bb77
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",196
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L113
+L78:	; if_then_bb92
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",197
+		BSR _BEEP
+L79:	; if_then_bb92.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",184
-		BSR _wait_ms
-		BRA L123
-L84:	; switch_clause_bb60
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",199
+		BSR _wait_ms
+		BRA L113
+L80:	; switch_clause_bb94
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",214
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -417,18 +417,18 @@ L84:	; switch_clause_bb60
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
-L85:	; if_then_bb75
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",200
+		BLT L113
+L81:	; if_then_bb109
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",215
 		BSR _BEEP
-L86:	; if_then_bb75.split
+L82:	; if_then_bb109.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",202
-		BSR _wait_ms
-		BRA L123
-L87:	; switch_clause_bb77
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",217
+		BSR _wait_ms
+		BRA L113
+L83:	; switch_clause_bb111
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",232
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -438,18 +438,18 @@ L87:	; switch_clause_bb77
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
-L88:	; if_then_bb92
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",218
+		BLT L113
+L84:	; if_then_bb126
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",233
 		BSR _BEEP
-L89:	; if_then_bb92.split
+L85:	; if_then_bb126.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",220
-		BSR _wait_ms
-		BRA L123
-L90:	; switch_clause_bb94
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",235
+		BSR _wait_ms
+		BRA L113
+L86:	; switch_clause_bb128
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",250
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -459,18 +459,18 @@ L90:	; switch_clause_bb94
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
-L91:	; if_then_bb109
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",236
+		BLT L113
+L87:	; if_then_bb143
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",251
 		BSR _BEEP
-L92:	; if_then_bb109.split
+L88:	; if_then_bb143.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",238
-		BSR _wait_ms
-		BRA L123
-L93:	; switch_clause_bb111
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",253
+		BSR _wait_ms
+		BRA L113
+L89:	; switch_clause_bb145
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",268
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -480,18 +480,18 @@ L93:	; switch_clause_bb111
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
-L94:	; if_then_bb126
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",254
+		BLT L113
+L90:	; if_then_bb160
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",269
 		BSR _BEEP
-L95:	; if_then_bb126.split
+L91:	; if_then_bb160.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",256
-		BSR _wait_ms
-		BRA L123
-L96:	; switch_clause_bb128
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",271
+		BSR _wait_ms
+		BRA L113
+L92:	; switch_clause_bb162
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",286
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -501,18 +501,18 @@ L96:	; switch_clause_bb128
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
-L97:	; if_then_bb143
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",272
+		BLT L113
+L93:	; if_then_bb177
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",287
 		BSR _BEEP
-L98:	; if_then_bb143.split
+L94:	; if_then_bb177.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",274
-		BSR _wait_ms
-		BRA L123
-L99:	; switch_clause_bb145
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",289
+		BSR _wait_ms
+		BRA L113
+L95:	; switch_clause_bb179
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",304
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -522,18 +522,18 @@ L99:	; switch_clause_bb145
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
-L100:	; if_then_bb160
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",290
+		BLT L113
+L96:	; if_then_bb194
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",305
 		BSR _BEEP
-L101:	; if_then_bb160.split
+L97:	; if_then_bb194.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",292
-		BSR _wait_ms
-		BRA L123
-L102:	; switch_clause_bb162
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",307
+		BSR _wait_ms
+		BRA L113
+L98:	; switch_clause_bb196
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",322
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -543,18 +543,18 @@ L102:	; switch_clause_bb162
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
-L103:	; if_then_bb177
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",308
+		BLT L113
+L99:	; if_then_bb211
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",323
 		BSR _BEEP
-L104:	; if_then_bb177.split
+L100:	; if_then_bb211.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",310
-		BSR _wait_ms
-		BRA L123
-L105:	; switch_clause_bb179
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",325
+		BSR _wait_ms
+		BRA L113
+L101:	; switch_clause_bb213
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",341
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -564,60 +564,39 @@ L105:	; switch_clause_bb179
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
-L106:	; if_then_bb194
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",326
+		BLT L113
+L102:	; if_then_bb228
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",342
 		BSR _BEEP
-L107:	; if_then_bb194.split
+L103:	; if_then_bb228.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",328
-		BSR _wait_ms
-		BRA L123
-L108:	; switch_clause_bb196
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",343
-		MOV.L #_sen_fr, R14
-		MOV.W [R14], R14
-		MOV.L #_sen_fl, R15
-		ADD [R15].W, R14
-		MOV.L #_sen_r, R15
-		ADD [R15].W, R14
-		MOV.L #_sen_l, R15
-		ADD [R15].W, R14
-		CMP #1F41H, R14
-		BLT L123
-L109:	; if_then_bb211
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",344
+		BSR _wait_ms
+		BRA L113
+L104:	; switch_clause_bb230
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",359
+		MOV.L #_sen_fr, R14
+		MOV.W [R14], R14
+		MOV.L #_sen_fl, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_r, R15
+		ADD [R15].W, R14
+		MOV.L #_sen_l, R15
+		ADD [R15].W, R14
+		CMP #1F41H, R14
+		BLT L113
+L105:	; if_then_bb245
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",360
 		BSR _BEEP
-L110:	; if_then_bb211.split
+L106:	; if_then_bb245.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",346
-		BSR _wait_ms
-		BRA L123
-L111:	; switch_clause_bb213
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",362
-		MOV.L #_sen_fr, R14
-		MOV.W [R14], R14
-		MOV.L #_sen_fl, R15
-		ADD [R15].W, R14
-		MOV.L #_sen_r, R15
-		ADD [R15].W, R14
-		MOV.L #_sen_l, R15
-		ADD [R15].W, R14
-		CMP #1F41H, R14
-		BLT L123
-L112:	; if_then_bb228
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",363
-		BSR _BEEP
-L113:	; if_then_bb228.split
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
-		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",365
 		BSR _wait_ms
-		BRA L123
-L114:	; switch_clause_bb230
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",380
+		BRA L113
+L107:	; switch_clause_bb247
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",377
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -627,33 +606,12 @@ L114:	; switch_clause_bb230
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F41H, R14
-		BLT L123
-L115:	; if_then_bb245
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",381
+		BLT L113
+L108:	; if_then_bb262
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",378
 		BSR _BEEP
-L116:	; if_then_bb245.split
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
-		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",383
-		BSR _wait_ms
-		BRA L123
-L117:	; switch_clause_bb247
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",398
-		MOV.L #_sen_fr, R14
-		MOV.W [R14], R14
-		MOV.L #_sen_fl, R15
-		ADD [R15].W, R14
-		MOV.L #_sen_r, R15
-		ADD [R15].W, R14
-		MOV.L #_sen_l, R15
-		ADD [R15].W, R14
-		CMP #1F41H, R14
-		BLT L123
-L118:	; if_then_bb262
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",399
-		BSR _BEEP
-L119:	; bb264
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",400
+L109:	; bb264
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",379
 		MOV.L #_sen_fr, R14
 		MOV.W [R14], R14
 		MOV.L #_sen_fl, R15
@@ -663,149 +621,149 @@ L119:	; bb264
 		MOV.L #_sen_l, R15
 		ADD [R15].W, R14
 		CMP #1F40H, R14
-		BGT L119
-L120:	; bb279
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",401
+		BGT L109
+L110:	; bb279
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",380
 		BSR _adjust
-L121:	; bb279.split
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",403
+L111:	; bb279.split
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",382
 		BSR _BEEP
-L122:	; bb279.split64
+L112:	; bb279.split54
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #000001F4H, R1
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",404
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",383
 		BSR _wait_ms
-L123:	; switch_break_bb
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",416
+L113:	; switch_break_bb
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",395
 		MOV.L #_speed, R14
 		MOV.L #3DCCCCCDH, R15
 		FCMP [R14].L, R15
-		BPZ L131
-L124:	; if_then_bb286
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",417
+		BPZ L121
+L114:	; if_then_bb286
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",396
 		MOV.W 02H[R0], R1
 		CMP #0FH, R1
-		BNE L126
-L125:	; if_then_bb292
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",418
+		BNE L116
+L115:	; if_then_bb292
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",397
 		MOV.W #0001H, 02H[R0]
-		BRA L127
-L126:	; if_else_bb
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",420
+		BRA L117
+L116:	; if_else_bb
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",399
 		MOV.W 02H[R0], R1
 		ADD #01H, R1
 		MOV.W R1, 02H[R0]
-L127:	; if_break_bb295
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",422
+L117:	; if_break_bb295
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",401
 		MOV.L #00000000H, 04H[R0]
-		BRA L129
-L128:	; bb296
+		BRA L119
+L118:	; bb296
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L 04H[R0], R1
 		ADD #01H, R1
 		MOV.L R1, 04H[R0]
-L129:	; bb299
+L119:	; bb299
 		MOV.L 04H[R0], R1
 		CMP #000F4240H, R1
-		BLTU L128
-L130:	; bb304
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",423
+		BLTU L118
+L120:	; bb304
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",402
 		BSR _BEEP
-L131:	; if_break_bb305
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",426
+L121:	; if_break_bb305
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",405
 		MOV.L #_speed, R14
 		MOV.L [R14], R14
 		FCMP #0BDCCCCCDH, R14
-		BPZ L139
-L132:	; if_then_bb310
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",427
+		BPZ L129
+L122:	; if_then_bb310
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",406
 		MOV.W 02H[R0], R1
 		CMP #01H, R1
-		BNE L134
-L133:	; if_then_bb316
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",428
+		BNE L124
+L123:	; if_then_bb316
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",407
 		MOV.W #000FH, 02H[R0]
-		BRA L135
-L134:	; if_else_bb317
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",430
+		BRA L125
+L124:	; if_else_bb317
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",409
 		MOV.W 02H[R0], R1
 		SUB #01H, R1
 		MOV.W R1, 02H[R0]
-L135:	; if_break_bb320
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",432
+L125:	; if_break_bb320
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",411
 		MOV.L #00000000H, 04H[R0]
-		BRA L137
-L136:	; bb321
+		BRA L127
+L126:	; bb321
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L 04H[R0], R1
 		ADD #01H, R1
 		MOV.L R1, 04H[R0]
-L137:	; bb324
+L127:	; bb324
 		MOV.L 04H[R0], R1
 		CMP #000F4240H, R1
-		BLTU L136
-L138:	; bb329
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",433
+		BLTU L126
+L128:	; bb329
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",412
 		BSR _BEEP
-L139:	; if_break_bb330
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",435
+L129:	; if_break_bb330
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",414
 		MOV.W 02H[R0], R1
 		BSR _LED
-L140:	; if_break_bb330.split
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",438
+L130:	; if_break_bb330.split
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",417
 		BSR _IOex_SWITCH
 		MOV.L #_push_switch, R14
 		MOV.B R1, [R14]
-L141:	; if_break_bb330.split65
+L131:	; if_break_bb330.split55
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
 		MOV.L #0008C02CH, R14
-		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",439
+		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",418
 		BCLR #06H, [R14].B
-L142:	; bb333.split
+L132:	; bb333.split
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",61
 		MOV.L #_I_tar_ang_vel, R14
 		MOV.L #00000000H, [R14]
-L143:	; bb333.split66
+L133:	; bb333.split56
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",62
 		MOV.L #_I_ang_vel, R14
 		MOV.L #00000000H, [R14]
-L144:	; bb333.split67
+L134:	; bb333.split57
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",63
 		MOV.L #_I_tar_speed, R14
 		MOV.L #00000000H, [R14]
-L145:	; bb333.split68
+L135:	; bb333.split58
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",64
 		MOV.L #_I_speed, R14
 		MOV.L #00000000H, [R14]
-L146:	; bb333.split69
+L136:	; bb333.split59
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",66
 		MOV.W 02H[R0], R1
 		SUB #01H, R1
 		CMP #0EH, R1
-		BGTU L123
-L147:	; bb333.split69
+		BGTU L113
+L137:	; bb333.split59
 		.LINE  "C:\Users\mechanica\MicroMouse_21\HM-StarterKit\Dev\HM_StarterKit.c",0
-		MOV.L #L148, R14
-		.swmov L148, R1, R14, R14
-L149:
+		MOV.L #L138, R14
+		.swmov L138, R1, R14, R14
+L139:
 		BRA.L R14
 		.swsection	W,stuff
-L148:
-		.switch		L17-L149
-		.switch		L43-L149
-		.switch		L69-L149
-		.switch		L84-L149
-		.switch		L87-L149
-		.switch		L90-L149
-		.switch		L93-L149
-		.switch		L96-L149
-		.switch		L99-L149
-		.switch		L102-L149
-		.switch		L105-L149
-		.switch		L108-L149
-		.switch		L111-L149
-		.switch		L114-L149
-		.switch		L117-L149
+L138:
+		.switch		L17-L139
+		.switch		L43-L139
+		.switch		L69-L139
+		.switch		L74-L139
+		.switch		L77-L139
+		.switch		L80-L139
+		.switch		L83-L139
+		.switch		L86-L139
+		.switch		L89-L139
+		.switch		L92-L139
+		.switch		L95-L139
+		.switch		L98-L139
+		.switch		L101-L139
+		.switch		L104-L139
+		.switch		L107-L139
 		.SECTION	W,ROMDATA,ALIGN=4
 		.SECTION	W_1,ROMDATA
 		.SECTION	W_2,ROMDATA,ALIGN=2
